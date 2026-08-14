@@ -1,41 +1,42 @@
-import machine
-import onewire
-import ds18x20
-import time
+from machine import Pin, ADC
+from time import sleep
 
-def OverheatPreset():   # preset 1
-    limit = 40
+# inputs
+sensor = ADC(26)  # Potentiometer on GP26
 
-    # sensor setup
-    ds = machine.Pin(26)
-    ow = onewire.OneWire(ds)
-    sensor = ds18x20.DS18X20(ow)
+# outputs
+led = Pin(3, Pin.OUT)
+buzzer = Pin(2, Pin.OUT)
 
-    # LED + buzzer
-    led = machine.Pin(15, machine.Pin.OUT)
-    buzzer = machine.Pin(14, machine.Pin.OUT)
+# setting
+THRESHOLD = 40000  # ned to adjust for the potentiometer
 
-    # find sensor
-    roms = sensor.scan()
-    print("Sensor:", roms)
+# the functions
+def read_temperature():
+    """Simulated temperature using potentiometer"""
+    return sensor.read_u16()
 
-    if len(roms) == 0:
-        print("No sensor found")
-        return
+def alert_on():
+    """Turn on led + buzzer"""
+    led.value(1)
+    buzzer.value(1)
 
-    while True:
-        sensor.convert_temp()
-        time.sleep_ms(750)
-        temp = sensor.read_temp(roms[0])
+def alert_off():
+    """Turn off led + buzzer"""
+    led.value(0)
+    buzzer.value(0)
 
-        print("Temp:", temp)
+def check_overheating():
+    """Main logic for overheating detection"""
+    temp = read_temperature()
+    print("Temperature:", temp)
 
-        if temp > limit:
-            led.value(1)
-            buzzer.value(1)
-        else:
-            led.value(0)
-            buzzer.value(0)
+    if temp > THRESHOLD:
+        alert_on()
+    else:
+        alert_off()
 
-        time.sleep(5)
- 
+# Main loop stuff
+while True:
+    check_overheating()
+    sleep(0.2)
