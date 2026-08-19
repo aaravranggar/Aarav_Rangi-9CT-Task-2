@@ -2,7 +2,7 @@ from machine import Pin, ADC
 from time import sleep
 
 # inputs
-sensor = ADC(26)  # Potentiometer on GP26
+sensor = ADC(26)  # Potentiometer on Point26
 
 # outputs
 led = Pin(3, Pin.OUT)
