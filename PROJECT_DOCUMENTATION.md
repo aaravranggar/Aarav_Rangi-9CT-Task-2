@@ -153,3 +153,8 @@ When I checked your code, the plus is that it’s not too hard to follow and the
 
 ## pmi pradhyot
 Your documentation is mostly fine and the flowchart helps a bit with understanding what’s going on which is the plus. A minus is that some of the writing feels rushed and there are spots where you could explain things more clearly. Also maybe adding a picture of your wiring would help because I couldn’t really imagine how you set it up. Something interesting is that your reflection shows you learned stuff, but it’s not super detailed and kinda short, so it doesn’t stand out that much.
+
+
+
+# Conclusion
+This project worked the way it was supposed to. The Pico could read the potentiometer and turn the LED and buzzer on when the value went past the threshold. I learned how to use inputs and outputs properly, and even though some parts were annoying, I still got it finished. If I did it again, I’d probably add more features, but overall I think the project turned out fine and does what it was meant to do.
