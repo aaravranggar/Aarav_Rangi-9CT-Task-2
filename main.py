@@ -2,14 +2,14 @@ from machine import Pin, ADC
 from time import sleep
 
 # inputs
-sensor = ADC(26)  # Potentiometer on Point26
+sensor = ADC(26)  # Potentiometer wire
 
 # outputs
-led = Pin(3, Pin.OUT)
-buzzer = Pin(2, Pin.OUT)
+led = Pin(15, Pin.OUT)      # led long leg at GP15
+buzzer = Pin(2, Pin.OUT)    # buzzer connected to GP2
 
 # setting
-THRESHOLD = 40000  # ned to adjust for the potentiometer
+THRESHOLD = 40000  # can adjust for the potentiometer
 
 # the functions
 def read_temperature():

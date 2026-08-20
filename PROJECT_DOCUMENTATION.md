@@ -110,3 +110,46 @@ END FUNCTION
 
 ![Flowchart](Flowchart_at2.png)
 
+
+
+## Program Explanation
+This project is a temperature warning system that uses a Pico, a sensor, an LED, and a buzzer. The whole idea is that the Pico keeps checking the temperature over and over, and if it gets too hot, it turns on the LED and buzzer to warn you. If the temperature is normal, it keeps them off.
+
+First, the Pico sets everything up, like the threshold number and which pins the LED and buzzer are connected to. Then it goes into a loop that never stops. Inside the loop, it reads the temperature from the sensor. After that, it checks if the temperature is bigger than the threshold. If it is, the alert turns on. If it’s not, the alert turns off. It waits 0.2 seconds so it doesn’t go super fast, and then it loops again.
+
+It’s basically a simple safety system that tells you when things get too hot.
+
+## How the Code Works
+The code starts by setting up the sensor and the output pins. Then it makes a threshold value, which is the number the temperature has to pass before the alarm turns on. After that, the code goes into a loop that never ends.
+
+Inside the loop, the Pico reads the temperature using the ADC pin. Then it checks if the temperature is higher than the threshold. If it is, it runs alert_on(), which turns the LED and buzzer on. If the temperature is lower, it runs alert_off(), which turns them off. After each check, the code waits 0.2 seconds so the Pico doesn’t spam the sensor too fast.
+
+It’s basically just checking, deciding, and reacting over and over.
+
+
+## Testing
+To test the project, I tried different temperature values to see if the LED and buzzer reacted properly. When I made the temperature go above the threshold, the LED and buzzer turned on like they were supposed to. When the temperature stayed below the threshold, they stayed off.
+
+I also tested the delay to make sure the Pico wasn’t switching too fast. Everything worked the way I expected. The alert turned on and off at the right times, and the loop kept running without crashing.
+
+
+
+## Reflection
+I learned a lot from this project, especially how sensors and microcontrollers work together. At first, it was confusing to understand how the ADC reading turned into a temperature, but after practicing it made more sense. The wiring was a bit annoying because the buzzer and LED had to be connected properly or nothing worked.
+
+If I did this again, I’d probably add a screen so you can actually see the temperature instead of guessing. I’d also maybe add more alerts or make the buzzer beep instead of just staying on. But overall, I think it turned out pretty good and I understand how the whole system works now.
+
+
+
+
+# PMIS
+
+## pmi Mrigraank
+When I looked at your temperature alert system, I think the good part is that it works pretty simply and I could understand what you were trying to do. The LED and buzzer turning on when it gets too hot is a clear idea and it makes sense. One minus is that some parts of your explanation were a bit confusing and I had to read it twice to get what you meant. Also the buzzer might be too loud and kinda annoying if someone uses it for real. Something interesting  is that the Pico keeps looping forever, but honestly it’s just doing the same thing over and over.
+
+## pmi alfonso
+When I checked your code, the plus is that it’s not too hard to follow and the functions make it a bit easier to read. The loop is basic but it does what it needs to do. A minus is that you could add more comments because some parts feel a bit empty and I wasn’t totally sure why you picked certain numbers. Also the sensor reading part looks kinda messy and might confuse someone who hasn’t used ADC before. Something interesting is that the code reacts pretty fast, but it just works how it’s supposed to.
+
+
+## pmi pradhyot
+Your documentation is mostly fine and the flowchart helps a bit with understanding what’s going on which is the plus. A minus is that some of the writing feels rushed and there are spots where you could explain things more clearly. Also maybe adding a picture of your wiring would help because I couldn’t really imagine how you set it up. Something interesting is that your reflection shows you learned stuff, but it’s not super detailed and kinda short, so it doesn’t stand out that much.
