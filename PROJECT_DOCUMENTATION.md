@@ -65,3 +65,48 @@ This gives the user an immediate warning so they can save their work, turn off t
 | Debug output         | Any potentiometer value                | Console prints current sensor reading    |
 
 
+## Pseudocode
+
+START
+
+SET threshold to 40000
+SET sensor to ADC pin 26
+SET LED to output pin 15
+SET buzzer to output pin 14
+
+LOOP FOREVER
+    READ the current temperature value
+    IF temperature is above threshold THEN
+        CALL alert_on
+    ELSE
+        CALL alert_off
+    ENDIF
+    WAIT 0.2 seconds
+ENDLOOP
+
+END
+### Subroutine pseudo code
+
+FUNCTION read_temperature
+    READ value from sensor (ADC 26)
+    RETURN the value
+END FUNCTION
+
+
+FUNCTION check_overheating
+    CALL read_temperature and STORE result as temp
+    PRINT temp to console
+
+    IF temp is greater than threshold THEN
+        CALL alert_on
+    ELSE
+        CALL alert_off
+    ENDIF
+END FUNCTION
+
+
+
+
+
+![Flowchart](Flowchart_at2.png)
+
