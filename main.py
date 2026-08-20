@@ -2,41 +2,42 @@ from machine import Pin, ADC
 from time import sleep
 
 # inputs
-sensor = ADC(26)  # Potentiometer wire
+sensor = ADC(26)  # Potentiometer
 
 # outputs
-led = Pin(15, Pin.OUT)      # led long leg at GP15
-buzzer = Pin(2, Pin.OUT)    # buzzer connected to GP2
+led = Pin(15, Pin.OUT)      # led long leg 
+buzzer = Pin(2, Pin.OUT)    # buzzer 
 
 # setting
-THRESHOLD = 40000  # can adjust for the potentiometer
+THRESHOLD = 40   # 40°C overheating threshold
 
-# the functions
+# convert ADC → Celsius (fake temperature)
+def adc_to_celsius(adc_value):
+    
+    return (adc_value / 65535) * (100 - 20) + 20
+
 def read_temperature():
-    """Simulated temperature using potentiometer"""
-    return sensor.read_u16()
+    raw = sensor.read_u16()
+    temp_c = adc_to_celsius(raw)
+    return temp_c
 
 def alert_on():
-    """Turn on led + buzzer"""
     led.value(1)
     buzzer.value(1)
 
 def alert_off():
-    """Turn off led + buzzer"""
     led.value(0)
     buzzer.value(0)
 
 def check_overheating():
-    """Main logic for overheating detection"""
     temp = read_temperature()
-    print("Temperature:", temp)
+    print("Temperature (°C):", round(temp, 2))
 
     if temp > THRESHOLD:
         alert_on()
     else:
         alert_off()
 
-# Main loop stuff
 while True:
     check_overheating()
     sleep(0.2)
